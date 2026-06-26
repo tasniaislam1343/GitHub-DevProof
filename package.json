@@ -1,25 +1,15 @@
 {
-  "name": "devproof-backend",
+  "name": "devproof-monorepo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "DevProof Backend and Frontend",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:backend": "cd Backend && node src/server.js",
+    "start:frontend": "cd Frontend && npm run dev",
+    "dev": "npx concurrently \"npm run start:backend\" \"npm run start:frontend\""
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "axios": "^1.15.2",
-    "cors": "^2.8.6",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "mysql2": "^3.22.1",
-    "sequelize": "^6.37.8"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.14",
-    "sequelize-cli": "^6.6.5"
+    "concurrently": "^9.2.1"
   }
 }

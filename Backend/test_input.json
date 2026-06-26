@@ -1,0 +1,1 @@
+{"code_samples": [{"repo": "repo_a", "code": "function add(a, b) { return a + b; } function multiply(a, b) { return a * b; }"}, {"repo": "repo_b", "code": "function sum(x, y) { return x + y; } function product(x, y) { return x * y; }"}, {"repo": "repo_c", "code": "class UserService { getUser(id) { return db.query(id); } deleteUser(id) { return db.delete(id); } }"}]}
