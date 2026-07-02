@@ -1,10 +1,12 @@
 const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+if (!process.env.VERCEL) {
+  require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
+}
 const express = require('express');
 const cors = require('cors');
 const { sequelize } = require('./models');
-const githubRoutes = require('./routes/githubRoutes'); // <-- Imported Route
-const trustScoreRoutes = require('./routes/trustScoreRoutes'); // NEW: Import TrustScore routes
+const githubRoutes = require('./routes/githubRoutes');
+const trustScoreRoutes = require('./routes/trustScoreRoutes');
 const authRoutes = require('./routes/authRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 
@@ -17,16 +19,19 @@ app.use('/api/dashboard', dashboardRoutes);
 app.get('/', (req, res) => {
     res.send('DevProof API is running!');
 });
-app.use('/api/github', githubRoutes); // <-- Tell Express to use it
-app.use('/api/trustscore', trustScoreRoutes); // NEW: Tell Express to use it
+app.use('/api/github', githubRoutes);
+app.use('/api/trustscore', trustScoreRoutes);
 
 const PORT = process.env.PORT || 5001;
 
-// Start server immediately — don't wait for DB
-app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-    connectWithRetry();
-});
+if (require.main === module || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      connectWithRetry();
+  });
+}
+
+module.exports = app;
 
 // Retry DB connection with exponential backoff
 async function connectWithRetry(retries = 5, delay = 3000) {

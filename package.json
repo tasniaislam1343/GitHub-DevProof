@@ -5,7 +5,9 @@
   "scripts": {
     "start:backend": "cd Backend && node src/server.js",
     "start:frontend": "cd Frontend && npm run dev",
-    "dev": "npx concurrently \"npm run start:backend\" \"npm run start:frontend\""
+    "dev": "npx concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "build": "cd Frontend && npm install && npm run build",
+    "vercel-build": "cd Frontend && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",

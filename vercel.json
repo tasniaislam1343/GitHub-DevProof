@@ -1,0 +1,16 @@
+{
+  "buildCommand": "cd Frontend && npm install && npm run build",
+  "outputDirectory": "Frontend/dist",
+  "installCommand": "npm install",
+  "devCommand": null,
+  "functions": {
+    "api/index.js": {
+      "memory": 512,
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
+}
