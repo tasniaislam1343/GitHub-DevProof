@@ -94,13 +94,15 @@ const githubLogin = async (req, res) => {
 
     try {
         // 1. Exchange code for access token
+        const proto = req.headers['x-forwarded-proto'] || 'http';
+        const redirectUri = `${proto}://${req.get('host')}/login`;
         const tokenResponse = await axios.post(
             'https://github.com/login/oauth/access_token',
             {
                 client_id: process.env.GITHUB_CLIENT_ID,
                 client_secret: process.env.GITHUB_CLIENT_SECRET,
                 code,
-                redirect_uri: 'http://localhost:5173/login'
+                redirect_uri: redirectUri
             },
             { headers: { Accept: 'application/json' } }
         );
