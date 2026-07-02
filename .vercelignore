@@ -1,6 +1,3 @@
-# Exclude root node_modules (only concurrently)
-/node_modules
-
 # Exclude Frontend files (built separately)
 /Frontend/node_modules
 /Frontend/dist
